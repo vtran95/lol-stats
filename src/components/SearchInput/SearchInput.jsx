@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './SearchInput.css';
+import matchInfoAPI from '../../utils/matchInfoAPI';
 import {Input, Button} from 'react-materialize';
 
 class SearchInput extends Component {
@@ -13,7 +14,12 @@ class SearchInput extends Component {
     handleChange = (e) => {
         this.setState({
             sumName: e.target.value
-        }, () => {console.log(this.state)});
+        });
+    }
+
+    handleSubmit = (e) => {
+        // e.preventDefault();
+        matchInfoAPI.show(this.state.sumName);
     }
 
     render() {
