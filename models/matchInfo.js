@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var matchInfoSchema = new Schema({
+    actId: Number,
     champLevel: Number,
     champName: String,
     csPerMin: Number,
@@ -9,6 +10,7 @@ var matchInfoSchema = new Schema({
     gameLength: Number,
     items: [String],
     kda: [Number],
+    player:[{name: String, champion: String}],
     sumName: String,
     sumRunes: [String],
     sumSpells: [String],

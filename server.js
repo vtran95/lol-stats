@@ -18,6 +18,8 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 app.use(bodyParser.json());
 
+leagueJs.StaticData.setup('./dragontail-6.24.1', true)
+
 app.use('/matchinfo', require('./routes/matchInfo'));
 
 app.get('/*', function(req, res) {
