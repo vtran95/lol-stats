@@ -7,7 +7,8 @@ class SearchInput extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sumName: ''
+            sumName: '',
+            // matchHistory: {}
         }
     }
 
@@ -18,8 +19,11 @@ class SearchInput extends Component {
     }
 
     handleSubmit = (e) => {
-        // e.preventDefault();
-        matchInfoAPI.show(this.state.sumName);
+        e.preventDefault();
+        matchInfoAPI.show(this.state.sumName)
+        .then(matchHistory => {
+            this.props.handleMatchHistory(matchHistory);
+        })
     }
 
     render() {

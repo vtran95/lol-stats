@@ -10,7 +10,22 @@ import './App.css';
 import WelcomePage from '../WelcomePage/WelcomePage';
 import SearchPage from '../SearchPage/SearchPage';
 
+
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+        matchHistory: {}
+    }
+  }
+
+  handleMatchHistory = (matchHistory) => {
+    this.setState({matchHistory}, () => {
+      console.log(this.state.matchHistory);
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -20,6 +35,7 @@ class App extends Component {
               <Route exact path='/' render={(props) => 
                 <WelcomePage 
                   {...props}
+                  handleMatchHistory={this.handleMatchHistory}
                 />
               }/>
               <Route path='/summoner' render={(props) => (

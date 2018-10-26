@@ -19,4 +19,16 @@ var matchInfoSchema = new Schema({
     timestamps: true
 });
 
-module.exports = mongoose.model('MatchInfo', matchInfoSchema);
+var matchInfo = mongoose.model('MatchInfo', matchInfoSchema);
+
+var matchHistorySchema = new Schema({
+    name: String,
+    matches: [matchInfoSchema]
+})
+
+var matchHistory = mongoose.model('MatchHistory', matchHistorySchema);
+
+module.exports = {
+    matchInfo,
+    matchHistory
+}
