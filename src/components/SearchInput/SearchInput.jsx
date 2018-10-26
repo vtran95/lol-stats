@@ -24,9 +24,9 @@ class SearchInput extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <Input className='Input' label='Enter Summoner Name' onChange={(e) => this.handleChange(e)}/>
-                <Button waves='light'>Search</Button>
+            <form className='search-form' onSubmit={this.handleSubmit}>
+                <Input className='search-input' label='Enter Summoner Name' onChange={(e) => this.handleChange(e)}/>
+                <Button className='search-button' waves='light'>Search</Button>
             </form>
         )
     }

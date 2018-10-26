@@ -9,10 +9,10 @@ var matchInfoSchema = new Schema({
     csTotal: Number,
     gameLength: Number,
     items: [String],
-    kda: [Number],
-    player:[{name: String, champion: String}],
+    kda: {kills: Number, deaths: Number, assists: Number, ratio: Number},
+    players:[{playerId: Number, name: String, champion: String}],
     sumName: String,
-    sumRunes: [String],
+    sumRunes: {keystone: String, path: String},
     sumSpells: [String],
     victory: Boolean
 }, {

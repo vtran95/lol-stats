@@ -1,3 +1,12 @@
-.Input {
+.search-form {
+    display: flex;
+    justify-content: center;
+}
+
+.input-field {
     width: 400px;
+}
+
+.search-button {
+    margin: 25px 0 0 25px;
 }
