@@ -1,4 +1,4 @@
-# LoL Stats
+# LoL Summoner
 
 ## Description
 A League of Legends stats app capable of viewing a player's recent match history.
