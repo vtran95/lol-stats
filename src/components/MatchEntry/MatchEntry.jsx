@@ -1,6 +1,6 @@
 import React from 'react';
 import './MatchEntry.css';
-import {Card, Col} from 'react-materialize';
+import {Card} from 'react-materialize';
 
 const MatchEntry = (props) => {
 
@@ -104,8 +104,8 @@ const MatchEntry = (props) => {
         for(var i = 0; i < half; i++) {
             team1.push(props.match.players[i]);
         }
-        for(var i = half; i < total; i++) {
-            team2.push(props.match.players[i]);
+        for(var j = half; j < total; j++) {
+            team2.push(props.match.players[j]);
         }
     }
 
@@ -119,7 +119,7 @@ const MatchEntry = (props) => {
 
     function getChampIcon(champ) {
         var strLink = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + champ;
-        return <img src={strLink} />
+        return <img src={strLink} alt={champ} />
     }
 
     return (
