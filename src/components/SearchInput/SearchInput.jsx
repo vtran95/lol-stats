@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import './SearchInput.css';
 import matchInfoAPI from '../../utils/matchInfoAPI';
-import {Input, Button} from 'react-materialize';
+import {Input, Button, Preloader} from 'react-materialize';
 
 class SearchInput extends Component {
     constructor(props) {
         super(props);
         this.state = {
             sumName: '',
-            // matchHistory: {}
+            showPreloader: false,
+            invalidInput: false
         }
     }
 
@@ -20,18 +21,26 @@ class SearchInput extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        this.setState({showPreloader: true});
         matchInfoAPI.show(this.state.sumName)
         .then(matchHistory => {
             this.props.handleMatchHistory(matchHistory);
+        }).then(() => {
+            this.setState({showPreloader: false});
+            this.props.history.push('/summoner/' + this.state.sumName);
         })
     }
 
     render() {
         return (
-            <form className='search-form' onSubmit={this.handleSubmit}>
-                <Input className='search-input' label='Enter Summoner Name' onChange={(e) => this.handleChange(e)}/>
-                <Button className='search-button' waves='light'>Search</Button>
-            </form>
+            <div>
+                <form className='search-form' onSubmit={this.handleSubmit}>
+                    <Input className='search-input' label='Enter Summoner Name' onChange={(e) => this.handleChange(e)}/>
+                    <Button className='search-button' waves='light'>Search</Button>
+                    { this.state.showPreloader && <Preloader className='preloader' size='small' /> }
+                </form>
+                {this.state.invalidInput && <p>Invalid input.</p>}
+            </div>
         )
     }
 }

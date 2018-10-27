@@ -30,6 +30,7 @@ async function show(req, res) {
             for (var i = 0; i < getMatch.participants.length; i++) {
                 let champ = await leagueJs.StaticData.gettingChampionById(getMatch.participants[i].championId);
                 matchInfo.players[i].champion = champ.name;
+                matchInfo.players[i].icon = champ.image.full;
                 if (getMatch.participants[i].participantId === mainParticipantId[mainParticipantId.length-1]) {
 
                     let sumSpell1 = await leagueJs.StaticData.gettingSummonerSpellsById(getMatch.participants[i].spell1Id);
@@ -50,10 +51,13 @@ async function show(req, res) {
                         if (getMatch.participants[i].stats[item] != 0) {
                             let itemData = await leagueJs.StaticData.gettingItemById(getMatch.participants[i].stats[item]);
                             matchInfo.items[j] = itemData.name;
+                        } else {
+                            matchInfo.items[j] = 'Empty';
                         }
                     }
 
                     matchInfo.champName = champ.name;
+                    matchInfo.champIcon = champ.image.full;
                     matchInfo.victory = getMatch.participants[i].stats.win;
                     matchInfo.champLevel = getMatch.participants[i].stats.champLevel;
                     matchInfo.csTotal = getMatch.participants[i].stats.totalMinionsKilled;
@@ -84,11 +88,14 @@ async function show(req, res) {
         }
 
         let newMatchHistory = await matchHistory.save();
-        console.log(mainParticipantId);
-        for(var i=0; i<matches.length; i++) {
-            console.log(newMatchHistory.matches[i]);
-        }
+        // console.log(mainParticipantId);
+        // for(var i=0; i<matches.length; i++) {
+        //     console.log(newMatchHistory.matches[i]);
+        // }
         res.status(200).json(newMatchHistory);
+    } else {
+        res.end();
+        return;
     }
 }
 

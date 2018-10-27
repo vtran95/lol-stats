@@ -6,7 +6,7 @@ const WelcomePage = (props) => {
     return (
         <div className="WelcomePage">
             <h1>Welcome, Summoner.</h1>
-            <SearchInput handleMatchHistory={props.handleMatchHistory} />
+            <SearchInput {...props} handleMatchHistory={props.handleMatchHistory} />
         </div>
     )
 }
