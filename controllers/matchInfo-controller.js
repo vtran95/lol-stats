@@ -1,4 +1,4 @@
-var LeagueJs = require('LeagueJS');
+var LeagueJs = require('../node_modules/leaguejs/lib/LeagueJS');
 var matchDetails = require ('../models/matchInfo');
 const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
 var XRegExp = require('xregexp');
