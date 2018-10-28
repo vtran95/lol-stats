@@ -9,6 +9,7 @@ require('dotenv').config();
 require('./config/database');
 
 var app = express();
+process.env.LEAGUE_API_PLATFORM_ID = 'na1'
 var leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
 
 app.use(logger('dev'));
