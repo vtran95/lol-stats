@@ -53,15 +53,17 @@ async function show(req, res) {
                     // let sumSpell1 = await leagueJs.StaticData.gettingSummonerSpellsById(getMatch.participants[i].spell1Id, region);
                     var sumSpell2 = getSumSpell(sumSpellList, getMatch.participants[i].spell2Id);
                     // let sumSpell2 = await leagueJs.StaticData.gettingSummonerSpellsById(getMatch.participants[i].spell2Id, region);
+                    var keystone = {};
                     if (getMatch.participants[i].stats.perk0) {
-                        var keystone = await leagueJs.StaticData.gettingReforgedRuneById(getMatch.participants[i].stats.perk0, region);
+                        keystone = await leagueJs.StaticData.gettingReforgedRuneById(getMatch.participants[i].stats.perk0, region);
                     } else {
-                        var keystone = {name: 'blank'};
+                        keystone.name = 'blank';
                     }
+                    var runePath = {};
                     if (getMatch.participants[i].stats.perkPrimaryStyle) {
-                        var runePath = await leagueJs.StaticData.gettingReforgedRunesPathById(getMatch.participants[i].stats.perkPrimaryStyle, region);
+                        runePath = await leagueJs.StaticData.gettingReforgedRunesPathById(getMatch.participants[i].stats.perkPrimaryStyle, region);
                     } else {
-                        var runePath = {name: 'blank'};
+                        runePath.name = 'blank';
                     }
 
                     for (var j=0; j<=6; j++) {

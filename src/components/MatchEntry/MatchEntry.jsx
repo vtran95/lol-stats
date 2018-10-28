@@ -1,6 +1,6 @@
 import React from 'react';
 import './MatchEntry.css';
-import {Card} from 'react-materialize';
+import {Card, Row, Col} from 'react-materialize';
 
 const MatchEntry = (props) => {
 
@@ -83,7 +83,7 @@ const MatchEntry = (props) => {
                                         </div>
                             })}
                         </div>
-                        <p>VS</p>
+                        <div className='vs'>VS</div>
                         <div className='team'>
                             {team2.map(player => {
                                 return <div className='player'>
@@ -124,42 +124,52 @@ const MatchEntry = (props) => {
 
     return (
         <Card title={checkWin()} className={cardColour} textClassName='white-text'>
-            <div className='cardClass'>
-                <div className='champion'>
-                    {getChampIcon(props.match.champIcon)}
-                    <h5>{props.match.champName}</h5>
-                    <div>
-                        Level {props.match.champLevel}
+            <Row className='cardClass'>
+                <Col s={4} m={4}>
+                <div className='sumInfo'>
+                    <div className='champion'>
+                        {getChampIcon(props.match.champIcon)}
+                        <h5>{props.match.champName}</h5>
+                        <div>
+                            Level {props.match.champLevel}
+                        </div>
                     </div>
-                </div>
-                <div className= 'spell-runes'>
-                    <p>{props.match.sumSpells[0]}</p>
-                    <p>{props.match.sumSpells[1]}</p>
-                </div>
-                <div className= 'spell-runes'>
-                    <p>{props.match.sumRunes.keystone}</p>
-                    <p>{props.match.sumRunes.path}</p>
-                </div>
-                <div className='stats'>
-                    <p>
-                        {gameTime()}
-                    </p>
-                    <p>
-                        {props.match.kda.kills} / {props.match.kda.deaths} / {props.match.kda.assists}
-                    </p>
-                    <p>
-                        {props.match.kda.ratio} : 1 KDA
-                    </p>
-                    <p>
-                        CS Total: {props.match.csTotal}
-                    </p>
-                    <p>
-                        Per min: {props.match.csPerMin}
-                    </p>
-                </div>
-                {displayItems()}
-                {displayTeams()}
-            </div>
+                    <div>
+                        <div className= 'spell-runes'>
+                            <p>{props.match.sumSpells[0]}</p>
+                            <p>{props.match.sumSpells[1]}</p>
+                        </div>
+                        <div className= 'spell-runes'>
+                            <p>{props.match.sumRunes.keystone}</p>
+                            <p>{props.match.sumRunes.path}</p>
+                        </div>
+                    </div>
+                    <div className='stats'>
+                        <p>
+                            {gameTime()}
+                        </p>
+                        <p>
+                            {props.match.kda.kills} / {props.match.kda.deaths} / {props.match.kda.assists}
+                        </p>
+                        <p>
+                            {props.match.kda.ratio} : 1 KDA
+                        </p>
+                        <p>
+                            CS Total: {props.match.csTotal}
+                        </p>
+                        <p>
+                            Per min: {props.match.csPerMin}
+                        </p>
+                    </div>
+                    </div>
+                </Col>
+                <Col s={3} m={3}>
+                    {displayItems()}
+                </Col>
+                <Col s={5} m={5}>
+                    {displayTeams()}
+                </Col>
+            </Row>
         </Card>
     );  
 }
