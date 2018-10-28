@@ -10,7 +10,7 @@ require('./config/database');
 
 var app = express();
 process.env.LEAGUE_API_PLATFORM_ID = 'na1'
-var leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
+// var leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY, {PLATFORM_ID: process.env.LEAGUE_API_PLATFORM_ID});
 
 app.use(logger('dev'));
 
@@ -18,8 +18,6 @@ app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.use(bodyParser.json());
-
-leagueJs.StaticData.setup('./dragontail-6.24.1', true)
 
 app.use('/matchinfo', require('./routes/matchInfo'));
 

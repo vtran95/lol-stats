@@ -1,6 +1,7 @@
 var LeagueJs = require('../node_modules/leaguejs/lib/LeagueJS');
 var matchDetails = require ('../models/matchInfo');
-const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
+const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY, {PLATFORM_ID: process.env.LEAGUE_API_PLATFORM_ID});
+const DataDragonHelper = require('../node_modules/leaguejs/lib/DataDragon/DataDragonHelper');
 var XRegExp = require('xregexp');
 
 async function show(req, res) {
@@ -30,6 +31,7 @@ async function show(req, res) {
             })
             for (var i = 0; i < getMatch.participants.length; i++) {
                 let champ = await leagueJs.StaticData.gettingChampionById(getMatch.participants[i].championId, region);
+                // let champ = await DataDragonHelper.gettingChampionsList(getMatch.participants[i].championId);
                 matchInfo.players[i].champion = champ.name;
                 matchInfo.players[i].icon = champ.image.full;
                 if (getMatch.participants[i].participantId === mainParticipantId[mainParticipantId.length-1]) {
