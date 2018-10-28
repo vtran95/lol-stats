@@ -3,7 +3,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
-var LeagueJs = require('LeagueJS');
+var LeagueJs = require('./node_modules/leaguejs/lib/LeagueJS');
 
 require('dotenv').config();
 require('./config/database');
