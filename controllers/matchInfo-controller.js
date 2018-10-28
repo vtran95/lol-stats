@@ -10,7 +10,7 @@ async function show(req, res) {
     if (XRegExp.test(req.params.id, regex)) {
         let summoner = await leagueJs.Summoner.gettingByName(req.params.id, region);
         let matchListLong = await leagueJs.Match.gettingRecentListByAccount(summoner.accountId, region);
-        var matchList = matchListLong.matches.slice(0,10);
+        var matchList = matchListLong.matches.slice(0,1);
         var matches = [];
         var mainParticipantId = [];
         var matchHistory = new matchDetails.matchHistory;
