@@ -9,13 +9,14 @@ async function show(req, res) {
     var region = 'na1';
     if (XRegExp.test(req.params.id, regex)) {
         let summoner = await leagueJs.Summoner.gettingByName(req.params.id, region);
-        let matchList = await leagueJs.Match.gettingRecentListByAccount(summoner.accountId, region);
+        let matchListLong = await leagueJs.Match.gettingRecentListByAccount(summoner.accountId, region);
+        var matchList = matchListLong.matches.slice(0,10);
         var matches = [];
         var mainParticipantId = [];
         var matchHistory = new matchDetails.matchHistory;
         matchHistory.name = summoner.name;
 
-        for (const match of matchList.matches) {
+        for (const match of matchList) {
             let getMatch = await leagueJs.Match.gettingById(match.gameId, region);
             matches.push(getMatch);
 
