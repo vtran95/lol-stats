@@ -36,10 +36,6 @@ class SearchInput extends Component {
         })
     }
 
-    // static getDerivedStateFromError(error) {
-    //     this.setState({invalidInput: true});
-    // }
-
     render() {
         return (
             <div>
