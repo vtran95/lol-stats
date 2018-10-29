@@ -11,8 +11,13 @@ async function show(req, res) {
     var regex = new XRegExp("^[0-9\\p{L} _\\.]+$");
     var region = 'na1';
     if (XRegExp.test(req.params.id, regex)) {
-        let summoner = await leagueJs.Summoner.gettingByName(req.params.id, region);
-        let matchListLong = await leagueJs.Match.gettingRecentListByAccount(summoner.accountId, region);
+        try {
+            var summoner = await leagueJs.Summoner.gettingByName(req.params.id, region);
+        } catch(err) {
+            res.status(404).json(err);
+            return;
+        }
+        var matchListLong = await leagueJs.Match.gettingRecentListByAccount(summoner.accountId, region);
         var matchList = matchListLong.matches.slice(0,5);
         var matches = [];
         var mainParticipantId = [];

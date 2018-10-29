@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './SearchInput.css';
 import matchInfoAPI from '../../utils/matchInfoAPI';
+import {Redirect} from 'react-router-dom';
 import {Input, Button, Preloader} from 'react-materialize';
 
 class SearchInput extends Component {
@@ -23,6 +24,10 @@ class SearchInput extends Component {
         e.preventDefault();
         this.setState({showPreloader: true});
         matchInfoAPI.show(this.state.sumName)
+        .catch((err) => {
+            console.log(err);
+            this.setState({invalidInput: true});
+        })
         .then(matchHistory => {
             this.props.handleMatchHistory(matchHistory);
         }).then(() => {
@@ -30,6 +35,10 @@ class SearchInput extends Component {
             this.props.history.push('/summoner/' + this.state.sumName);
         })
     }
+
+    // static getDerivedStateFromError(error) {
+    //     this.setState({invalidInput: true});
+    // }
 
     render() {
         return (
@@ -39,7 +48,7 @@ class SearchInput extends Component {
                     <Button className='search-button' waves='light'>Search</Button>
                     { this.state.showPreloader && <Preloader className='preloader' size='small' /> }
                 </form>
-                {this.state.invalidInput && <p>Invalid input.</p>}
+                {this.state.invalidInput && <Redirect to='error'/>}
             </div>
         )
     }

@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
 // import logo from './logo.svg';
 import './App.css';
 import WelcomePage from '../WelcomePage/WelcomePage';
 import SearchPage from '../SearchPage/SearchPage';
+import ErrorPage from '../ErrorPage/ErrorPage';
 
 class App extends Component {
 
@@ -19,9 +21,18 @@ class App extends Component {
   }
 
   handleMatchHistory = (matchHistory) => {
-    this.setState({matchHistory}, () => {
-      console.log(this.state.matchHistory);
-    })
+    this.setState({matchHistory});
+  }
+
+  matchHistoryExists = () => {
+    if(!this.state.matchHistory) {
+      return false;
+    }
+    else if(Object.keys(this.state.matchHistory).length === 0) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   render() {
@@ -38,7 +49,13 @@ class App extends Component {
                 />
               }/>
               <Route path='/summoner' render={(props) => (
-                <SearchPage 
+                this.matchHistoryExists() ?
+                <SearchPage  {...this.state} {...props} handleMatchHistory={this.handleMatchHistory} />
+                 :
+                <Redirect to='/error' {...this.state} {...props} handleMatchHistory={this.handleMatchHistory} />
+              )}/>
+              <Route path='/error' render={(props) => (
+                <ErrorPage 
                   {...this.state}
                   {...props}
                   handleMatchHistory={this.handleMatchHistory}
