@@ -1,5 +1,7 @@
 # LoL Summoner
 
+[Link to the app](https://lol-summoner.herokuapp.com/)
+
 ## Description
 A League of Legends stats app capable of viewing a player's recent match history.
 This includes:
