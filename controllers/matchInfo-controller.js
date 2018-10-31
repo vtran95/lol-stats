@@ -3,6 +3,8 @@ var matchDetails = require ('../models/matchInfo');
 const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY, {PLATFORM_ID: process.env.LEAGUE_API_PLATFORM_ID});
 const DataDragonHelper = require('../node_modules/leaguejs/lib/DataDragon/DataDragonHelper');
 var XRegExp = require('xregexp');
+
+// TODO: Switch to the latest dragontail pkg 8.21.1(?)
 var champList = require('../dragontail-6.24.1/6.24.1/data/en_US/champion.json');
 var itemList = require('../dragontail-6.24.1/6.24.1/data/en_US/item.json');
 var sumSpellList = require('../dragontail-6.24.1/6.24.1/data/en_US/summoner.json');
@@ -39,7 +41,6 @@ async function show(req, res) {
                 matchInfo.players.push({playerId: participant.participantId , name: participant.player.summonerName});
             })
             for (var i = 0; i < getMatch.participants.length; i++) {
-                // let champ = await leagueJs.StaticData.gettingChampionById(getMatch.participants[i].championId, region);
                 var champ = {};
                 for(var champion in champList.data) {
                     if(champList.data[champion].key == getMatch.participants[i].championId) {
@@ -95,7 +96,6 @@ async function show(req, res) {
                     matchInfo.champIcon = champ.image.full;
                     matchInfo.victory = getMatch.participants[i].stats.win;
                     matchInfo.champLevel = getMatch.participants[i].stats.champLevel;
-                    matchInfo.csTotal = getMatch.participants[i].stats.totalMinionsKilled;
                     matchInfo.sumSpells.push(sumSpell1.name, sumSpell2.name);
                     matchInfo.sumRunes = {'keystone': keystone.name, 'path': runePath.name};
 
@@ -112,6 +112,10 @@ async function show(req, res) {
                     }
 
                     matchInfo.kda = {'kills': kill, 'deaths': death, 'assists': assist, 'ratio': ratio};
+
+                    var laneMinions = getMatch.participants[i].stats.totalMinionsKilled;
+                    var jungleMinions = getMatch.participants[i].stats.neutralMinionsKilled;
+                    matchInfo.csTotal = laneMinions + jungleMinions;
 
                     var csPerMinRounded = Math.floor((matchInfo.csTotal / (matchInfo.gameLength / 60)) * 10) / 10;
                     matchInfo.csPerMin = csPerMinRounded;
