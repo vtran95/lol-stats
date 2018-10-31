@@ -118,7 +118,7 @@ const MatchEntry = (props) => {
     }
 
     function getChampIcon(champ) {
-        var strLink = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + champ;
+        var strLink = 'http://ddragon.leagueoflegends.com/cdn/8.21.1/img/champion/' + champ;
         return <img src={strLink} alt={champ} />
     }
 
