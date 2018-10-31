@@ -5,9 +5,9 @@ const DataDragonHelper = require('../node_modules/leaguejs/lib/DataDragon/DataDr
 var XRegExp = require('xregexp');
 
 // TODO: Switch to the latest dragontail pkg 8.21.1(?)
-var champList = require('../dragontail-6.24.1/6.24.1/data/en_US/champion.json');
-var itemList = require('../dragontail-6.24.1/6.24.1/data/en_US/item.json');
-var sumSpellList = require('../dragontail-6.24.1/6.24.1/data/en_US/summoner.json');
+var champList = require('../dragontail-8.21.1/8.21.1/data/en_US/champion.json');
+var itemList = require('../dragontail-8.21.1/8.21.1/data/en_US/item.json');
+var sumSpellList = require('../dragontail-8.21.1/8.21.1/data/en_US/summoner.json');
 
 async function show(req, res) {
     var regex = new XRegExp("^[0-9\\p{L} _\\.]+$");
