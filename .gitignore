@@ -9,6 +9,9 @@
 # production
 #/build
 
+# league static data
+/dragontail-8.21.1
+
 # misc
 .DS_Store
 .env.local
